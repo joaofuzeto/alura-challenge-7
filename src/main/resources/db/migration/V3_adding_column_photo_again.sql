@@ -1,0 +1,1 @@
+alter table testimonials add photo varchar(max);
