@@ -29,4 +29,13 @@ public class Testimonial {
 		this.testimonial = data.testimonial();
 		this.name = data.name();		
 	}
+
+	public void update(TestimonialDataUpdate data) {
+		if(data.testimonial() != null) {
+			this.photo = data.photo();
+		} if (data.photo() != null) {
+			this.photo = data.photo();
+		}
+		
+	}
 }
