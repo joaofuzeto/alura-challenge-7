@@ -32,7 +32,7 @@ public class Testimonial {
 
 	public void update(TestimonialDataUpdate data) {
 		if(data.testimonial() != null) {
-			this.photo = data.photo();
+			this.testimonial = data.testimonial();
 		} if (data.photo() != null) {
 			this.photo = data.photo();
 		}
