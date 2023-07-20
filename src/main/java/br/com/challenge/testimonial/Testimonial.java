@@ -23,8 +23,10 @@ public class Testimonial {
 	private String photo;
 	private String testimonial;
 	private String name;
+	private boolean active;
 	
 	public Testimonial(TestimonialData data) {
+		this.active = true;
 		this.photo = data.photo();
 		this.testimonial = data.testimonial();
 		this.name = data.name();		
@@ -35,7 +37,14 @@ public class Testimonial {
 			this.testimonial = data.testimonial();
 		} if (data.photo() != null) {
 			this.photo = data.photo();
+		} if (data.active() != false) {
+			this.active = true;
 		}
 		
+	}
+
+
+	public void delete() {
+		this.active = false;
 	}
 }

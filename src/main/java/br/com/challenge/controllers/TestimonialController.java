@@ -3,8 +3,12 @@ package br.com.challenge.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,8 +36,8 @@ public class TestimonialController {
 	}
 		
 	@GetMapping	
-	public List<DataListingTestimonials> showTestimonials(){
-		return repository.findAll().stream().map(DataListingTestimonials::new).toList();
+	public Page<DataListingTestimonials> showTestimonials(Pageable page){
+		return repository.findAllByActiveTrue(page).map(DataListingTestimonials::new);
 	}
 	
 	@PutMapping
@@ -41,6 +45,13 @@ public class TestimonialController {
 	public void uptadeTestimonial(@RequestBody @Valid TestimonialDataUpdate data) {
 		var testimonial = repository.getReferenceById(data.id());
 		testimonial.update(data);
+	}
+	
+	@DeleteMapping("/{id}")
+	@Transactional
+	public void deleteTestimonial(@PathVariable Long id) {
+		var testimonial = repository.getReferenceById(id);
+		testimonial.delete();
 	}
 	
 }
